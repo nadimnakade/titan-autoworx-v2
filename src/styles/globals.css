@@ -1,0 +1,196 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --titan-void: #0A0D12;
+    --titan-deep: #13181F;
+    --titan-red: #C8312A;
+    --titan-red-light: #E8453C;
+    --titan-steel: #AAB2BD;
+    --titan-cream: #E8E5DD;
+    --titan-gold: #F2C14E;
+    --titan-carbon: #1A1D24;
+    --titan-slate: #2A2E36;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    background-color: var(--titan-void);
+    overflow-x: hidden;
+  }
+
+  html.lenis, html.lenis body {
+    height: auto;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--titan-void);
+    color: var(--titan-cream);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background: var(--titan-red);
+    color: var(--titan-cream);
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--titan-void);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--titan-red);
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--titan-red-light);
+  }
+}
+
+@layer components {
+  .text-gradient-red {
+    background: linear-gradient(135deg, var(--titan-red) 0%, var(--titan-red-light) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-gradient-gold {
+    background: linear-gradient(135deg, var(--titan-gold) 0%, #D4A520 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .border-gradient-flow {
+    background: linear-gradient(90deg, var(--titan-red), var(--titan-gold), var(--titan-red));
+    background-size: 200% 100%;
+    animation: borderFlow 3s linear infinite;
+  }
+
+  .glass-panel {
+    background: rgba(19, 24, 31, 0.6);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(200, 49, 42, 0.1);
+  }
+
+  .glass-panel-light {
+    background: rgba(26, 29, 36, 0.4);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(200, 49, 42, 0.08);
+  }
+
+  .scanline {
+    position: relative;
+  }
+
+  .scanline::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(200, 49, 42, 0.015) 2px,
+      rgba(200, 49, 42, 0.015) 4px
+    );
+    pointer-events: none;
+  }
+
+  .noise-overlay {
+    position: relative;
+  }
+
+  .noise-overlay::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .grid-bg {
+    background-image:
+      linear-gradient(rgba(200, 49, 42, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(200, 49, 42, 0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  .hero-text-shadow {
+    text-shadow: 0 0 80px rgba(200, 49, 42, 0.3), 0 0 160px rgba(200, 49, 42, 0.1);
+  }
+
+  .glow-red {
+    box-shadow: 0 0 30px rgba(200, 49, 42, 0.3), 0 0 60px rgba(200, 49, 42, 0.1);
+  }
+
+  .glow-gold {
+    box-shadow: 0 0 30px rgba(242, 193, 78, 0.3), 0 0 60px rgba(242, 193, 78, 0.1);
+  }
+
+  .telemetry-ring {
+    border: 1px solid rgba(200, 49, 42, 0.15);
+    border-radius: 50%;
+    position: absolute;
+  }
+
+  .scan-laser {
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--titan-red), transparent);
+    opacity: 0.6;
+  }
+
+  .corner-accent::before,
+  .corner-accent::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-color: var(--titan-red);
+  }
+
+  .corner-accent::before {
+    top: -1px;
+    left: -1px;
+    border-top: 1px solid;
+    border-left: 1px solid;
+  }
+
+  .corner-accent::after {
+    bottom: -1px;
+    right: -1px;
+    border-bottom: 1px solid;
+    border-right: 1px solid;
+  }
+}
+
+@layer utilities {
+  .clip-path-polygon {
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 40px), calc(100% - 40px) 100%, 0 100%);
+  }
+
+  .clip-path-diagonal {
+    clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+  }
+}
